@@ -23,17 +23,19 @@ class TestNQueens(unittest.TestCase):
     def testBoundaries(self):
         boundary_positions = [(0, 0), (0, 7), (7, 0), (7, 7)]
         for pos in boundary_positions:
-            self.assertFalse(self.standardBoard.hasQueen(pos[0], pos[1]))
+            with self.subTest(pos=pos):
+                self.assertFalse(self.standardBoard.hasQueen(pos[0], pos[1]))
 
     def testInvalidPositions(self):
         invalid_positions = [(-1, -1), (-1, 0), (0, -1), (8, 0), (0, 8),
                              (8, 8)]
         for pos in invalid_positions:
-            try:
-                self.standardBoard.hasQueen(pos[0], pos[1])
-                self.fail("Invalid hasQueen did not throw exception")
-            except ValueError:
-                pass
+            with self.subTest(pos=pos):
+                try:
+                    self.standardBoard.hasQueen(pos[0], pos[1])
+                    self.fail("Invalid hasQueen did not throw exception")
+                except ValueError:
+                    pass
 
     def testPlaceQueens(self):
         self.standardBoard.placeQueen(1, 1)

@@ -11,11 +11,8 @@ class TestNQueens(unittest.TestCase):
         self.assertEqual(self.standardBoard.size, 8)
 
     def testCreateInvalid(self):
-        try:
+        with self.assertRaises(ValueError):
             board = Chessboard.create(0)
-            self.fail("Invalid board size did not raise exception")
-        except ValueError:
-            pass
 
     def testHasQueenOk(self):
         self.assertFalse(self.standardBoard.hasQueen(0, 0))
@@ -31,11 +28,8 @@ class TestNQueens(unittest.TestCase):
                              (8, 8)]
         for pos in invalid_positions:
             with self.subTest(pos=pos):
-                try:
+                with self.assertRaises(ValueError):
                     self.standardBoard.hasQueen(pos[0], pos[1])
-                    self.fail("Invalid hasQueen did not throw exception")
-                except ValueError:
-                    pass
 
     def testPlaceQueens(self):
         self.standardBoard.placeQueen(1, 1)

@@ -40,16 +40,23 @@ class Chessboard:
                 return False
             attackedColumns.append(col)
 
-            leftColToTest = col
-            rightColToTest = col
-            for rowToTest in range(row + 1, self.size):
-                leftColToTest -= 1
-                rightColToTest += 1
-                if leftColToTest >= 0:
-                    if self.hasQueen(leftColToTest, rowToTest):
-                        return False
-                if rightColToTest < self.size:
-                    if self.hasQueen(rightColToTest, rowToTest):
-                        return False
+            if self.hasDiagonalClash(col, row, -1):
+                return False
+            if self.hasDiagonalClash(col, row, 1):
+                return False
 
         return True
+
+    def hasDiagonalClash(self, x, y, direction):
+        x = x + direction
+        y = y + 1
+
+        if y >= self.size:
+            return False
+        if (x < 0 or x >= self.size):
+            return False
+
+        if self.hasQueen(x, y):
+            return True
+        else:
+            return self.hasDiagonalClash(x, y, direction)

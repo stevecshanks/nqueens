@@ -36,3 +36,45 @@ class TestNQueens(unittest.TestCase):
         self.standardBoard.placeQueen(2, 2)
         self.assertTrue(self.standardBoard.hasQueen(1, 1))
         self.assertTrue(self.standardBoard.hasQueen(2, 2))
+
+    def testPlaceDuplicateQueen(self):
+        self.standardBoard.placeQueen(1, 1)
+        with self.assertRaises(ValueError):
+            self.standardBoard.placeQueen(1, 1)
+
+    def testValidateEmpty(self):
+        self.assertFalse(self.standardBoard.isValid())
+
+    def testValidateSimple(self):
+        board = Chessboard.create(1)
+        self.assertFalse(board.isValid())
+        board.placeQueen(0, 0)
+        self.assertTrue(board.isValid())
+
+    def testValidateHorizontal(self):
+        board = Chessboard.create(2)
+        self.assertFalse(board.isValid())
+        board.placeQueen(0, 0)
+        board.placeQueen(1, 0)
+        self.assertFalse(board.isValid())
+
+    def testValidateVertical(self):
+        board = Chessboard.create(2)
+        self.assertFalse(board.isValid())
+        board.placeQueen(0, 0)
+        board.placeQueen(0, 1)
+        self.assertFalse(board.isValid())
+
+    def testValidateDiagonalRight(self):
+        board = Chessboard.create(2)
+        self.assertFalse(board.isValid())
+        board.placeQueen(0, 0)
+        board.placeQueen(1, 1)
+        self.assertFalse(board.isValid())
+
+    def testValidateDiagonalLeft(self):
+        board = Chessboard.create(2)
+        self.assertFalse(board.isValid())
+        board.placeQueen(1, 0)
+        board.placeQueen(0, 1)
+        self.assertFalse(board.isValid())

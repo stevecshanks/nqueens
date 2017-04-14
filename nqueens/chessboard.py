@@ -26,10 +26,6 @@ class Chessboard:
         self.queenPositions.append((x, y))
 
     def isValid(self):
-        allQueensPlaced = len(self.queenPositions) == self.size
-        if not allQueensPlaced:
-            return False
-
         attackedRows = []
         attackedColumns = []
         for pos in self.queenPositions:

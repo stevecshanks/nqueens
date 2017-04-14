@@ -43,38 +43,33 @@ class TestNQueens(unittest.TestCase):
             self.standardBoard.placeQueen(1, 1)
 
     def testValidateEmpty(self):
-        self.assertFalse(self.standardBoard.isValid())
+        self.assertTrue(self.standardBoard.isValid())
 
     def testValidateSimple(self):
         board = Chessboard.create(1)
-        self.assertFalse(board.isValid())
         board.placeQueen(0, 0)
         self.assertTrue(board.isValid())
 
     def testValidateHorizontal(self):
         board = Chessboard.create(2)
-        self.assertFalse(board.isValid())
         board.placeQueen(0, 0)
         board.placeQueen(1, 0)
         self.assertFalse(board.isValid())
 
     def testValidateVertical(self):
         board = Chessboard.create(2)
-        self.assertFalse(board.isValid())
         board.placeQueen(0, 0)
         board.placeQueen(0, 1)
         self.assertFalse(board.isValid())
 
     def testValidateDiagonalRight(self):
         board = Chessboard.create(2)
-        self.assertFalse(board.isValid())
         board.placeQueen(0, 0)
         board.placeQueen(1, 1)
         self.assertFalse(board.isValid())
 
     def testValidateDiagonalLeft(self):
         board = Chessboard.create(2)
-        self.assertFalse(board.isValid())
         board.placeQueen(1, 0)
         board.placeQueen(0, 1)
         self.assertFalse(board.isValid())

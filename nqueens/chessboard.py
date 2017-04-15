@@ -25,6 +25,13 @@ class Chessboard:
             raise ValueError("Attempted to place queen in non-empty space")
         self.queenPositions.append((x, y))
 
+    def removeQueen(self, x, y):
+        self.raiseErrorIfPositionIsInvalid(x, y)
+        if (x, y) in self.queenPositions:
+            self.queenPositions.remove((x, y))
+        else:
+            raise ValueError("Attempted to remove queen from empty space")
+
     def isValid(self):
         attackedRows = []
         attackedColumns = []

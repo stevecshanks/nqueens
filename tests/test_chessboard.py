@@ -41,6 +41,15 @@ class TestChessboard(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.standardBoard.placeQueen(1, 1)
 
+    def testRemoveNonExistentQueen(self):
+        with self.assertRaises(ValueError):
+            self.standardBoard.removeQueen(1, 1)
+
+    def testRemoveQueen(self):
+        self.standardBoard.placeQueen(1, 1)
+        self.standardBoard.removeQueen(1, 1)
+        self.assertFalse(self.standardBoard.hasQueen(1, 1))
+
     def testValidateEmpty(self):
         self.assertTrue(self.standardBoard.isValid())
 

@@ -27,7 +27,7 @@ class TestPrinter(unittest.TestCase):
     def testPrintedRowCount(self):
         # This will confuse our row count, so have it do nothing
         self.printer.printHeaderRow = MagicMock()
-        
+
         self.printer.printBoard()
         newline_count = 0
         for call in self.printer.output.mock_calls:

@@ -17,14 +17,19 @@ class Solver:
             else:
                 return None
 
-        for x in range(0, solution.getSize()):
-            for y in range(0, solution.getSize()):
-                if not solution.hasQueen(x, y):
-                    solution.placeQueen(x, y)
-                    if (solution.isValid()):
-                        newSolution = self._tryToPlaceValidQueen(solution)
-                        if newSolution is not None:
-                            return newSolution
-                    solution.removeQueen(x, y)
+        columns = self._getNonThreatenedList(solution.getThreatenedColumns())
+        rows = self._getNonThreatenedList(solution.getThreatenedRows())
+        for x in columns:
+            for y in rows:
+                solution.placeQueen(x, y)
+                if (solution.isValid()):
+                    newSolution = self._tryToPlaceValidQueen(solution)
+                    if newSolution is not None:
+                        return newSolution
+                solution.removeQueen(x, y)
 
         return None
+
+    def _getNonThreatenedList(self, threatenedList):
+        solutionRange = range(0, self._board.getSize())
+        return [i for i in solutionRange if i not in threatenedList]

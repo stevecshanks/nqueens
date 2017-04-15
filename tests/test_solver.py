@@ -35,6 +35,5 @@ class TestSolver(unittest.TestCase):
     def testSmall(self):
         self.runTestFor(6)
 
-    @unittest.skip("Too slow")
     def testStandard(self):
         self.runTestFor(8)

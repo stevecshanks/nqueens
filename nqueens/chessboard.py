@@ -1,3 +1,6 @@
+from nqueens.diagonal import Diagonal
+
+
 class Chessboard:
 
     @staticmethod
@@ -39,20 +42,15 @@ class Chessboard:
             raise ValueError("Attempted to remove queen from empty space")
 
     def isValid(self):
+        # The getThreatenedX functions return a unique list of values.  If the
+        # number of values doesn't match the number of queens, then they must
+        # share a threatened X and so the board state isn't valid
         if len(self.getThreatenedColumns()) != len(self._queenPositions):
             return False
         if len(self.getThreatenedRows()) != len(self._queenPositions):
             return False
-
-        for pos in self._queenPositions:
-            col = pos[0]
-            # Since one queen must be above the other to attack diagonally, we
-            # only need to check for downward clashes
-            row = pos[1] + 1
-            if self.hasDiagonalClash(col, row, -1):
-                return False
-            if self.hasDiagonalClash(col, row, 1):
-                return False
+        if (len(self.getThreatenedDiagonals()) != len(self._queenPositions)):
+            return False
 
         return True
 
@@ -70,15 +68,10 @@ class Chessboard:
                 threatenedRows.append(pos[1])
         return threatenedRows
 
-    def hasDiagonalClash(self, x, y, direction):
-        x = x + direction
-
-        if y >= self._size:
-            return False
-        if (x < 0 or x >= self._size):
-            return False
-
-        if self.hasQueen(x, y):
-            return True
-        else:
-            return self.hasDiagonalClash(x, y + 1, direction)
+    def getThreatenedDiagonals(self):
+        threatenedDiagonals = []
+        for pos in self._queenPositions:
+            diagonal = Diagonal.fromPosition(pos[0], pos[1])
+            if diagonal not in threatenedDiagonals:
+                threatenedDiagonals.append(diagonal)
+        return threatenedDiagonals

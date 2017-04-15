@@ -1,10 +1,11 @@
 from nqueens.chessboard import Chessboard
 from nqueens.printer import Printer
+from nqueens.solver import Solver
 
 
 board = Chessboard.create(8)
-board.placeQueen(4, 7)
-board.placeQueen(1, 1)
-board.placeQueen(2, 3)
-printer = Printer.create(board)
-printer.printBoard()
+solver = Solver.create(board)
+solution = solver.solve()
+if solution is not None:
+    printer = Printer.create(solution)
+    printer.printBoard()

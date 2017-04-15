@@ -5,17 +5,18 @@ class Printer:
         return Printer(board)
 
     def __init__(self, board):
-        self.board = board
+        self._board = board
+        self._shading = False
 
     def printBoard(self):
         self.printHeaderRow()
-        for y in range(0, self.board.getSize()):
+        for y in range(0, self._board.getSize()):
             self.printRow(y)
 
     def printRow(self, y):
         self.output("|")
-        for x in range(0, self.board.getSize()):
-            if self.board.hasQueen(x, y):
+        for x in range(0, self._board.getSize()):
+            if self._board.hasQueen(x, y):
                 self.printQueen()
             else:
                 self.printEmptyCell()
@@ -28,12 +29,12 @@ class Printer:
 
     def printHeaderRow(self):
         self.output("+")
-        for i in range(0, self.board.getSize()):
-            self.output("---+")
+        for i in range(0, self._board.getSize()):
+            self.output("----+")
         self.output("\n")
 
     def printEmptyCell(self):
-        self.output("   ")
+        self.output("    ")
 
     def printQueen(self):
-        self.output(" Q ")
+        self.output(" Qu ")

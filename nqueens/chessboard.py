@@ -46,7 +46,9 @@ class Chessboard:
 
         for pos in self._queenPositions:
             col = pos[0]
-            row = pos[1]
+            # Since one queen must be above the other to attack diagonally, we
+            # only need to check for downward clashes
+            row = pos[1] + 1
             if self.hasDiagonalClash(col, row, -1):
                 return False
             if self.hasDiagonalClash(col, row, 1):
@@ -70,9 +72,6 @@ class Chessboard:
 
     def hasDiagonalClash(self, x, y, direction):
         x = x + direction
-        # Since one queen must be above the other to attack diagonally, we
-        # only need to check for downward clashes
-        y = y + 1
 
         if y >= self._size:
             return False
@@ -82,4 +81,4 @@ class Chessboard:
         if self.hasQueen(x, y):
             return True
         else:
-            return self.hasDiagonalClash(x, y, direction)
+            return self.hasDiagonalClash(x, y + 1, direction)

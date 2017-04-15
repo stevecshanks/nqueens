@@ -2,7 +2,7 @@ import unittest
 from nqueens.chessboard import Chessboard
 
 
-class TestNQueens(unittest.TestCase):
+class TestChessboard(unittest.TestCase):
 
     def setUp(self):
         self.standardBoard = Chessboard.create(8)
@@ -27,9 +27,8 @@ class TestNQueens(unittest.TestCase):
         invalid_positions = [(-1, -1), (-1, 0), (0, -1), (8, 0), (0, 8),
                              (8, 8)]
         for pos in invalid_positions:
-            with self.subTest(pos=pos):
-                with self.assertRaises(ValueError):
-                    self.standardBoard.hasQueen(pos[0], pos[1])
+            with self.subTest(pos=pos), self.assertRaises(ValueError):
+                self.standardBoard.hasQueen(pos[0], pos[1])
 
     def testPlaceQueens(self):
         self.standardBoard.placeQueen(1, 1)

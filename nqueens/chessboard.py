@@ -49,6 +49,8 @@ class Chessboard:
 
     def hasDiagonalClash(self, x, y, direction):
         x = x + direction
+        # Since one queen must be above the other to attack diagonally, we
+        # only need to check for downward clashes
         y = y + 1
 
         if y >= self.size:

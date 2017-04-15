@@ -1,29 +1,39 @@
 import unittest
-from nqueens.diagonal import Diagonal
+from nqueens.threat import Threat
 
 
-class TestDiagonal(unittest.TestCase):
+class TestThreat(unittest.TestCase):
 
     def testIdentical(self):
-        a = Diagonal.fromPosition(0, 0)
-        b = Diagonal.fromPosition(0, 0)
+        a = Threat.fromPosition(0, 0)
+        b = Threat.fromPosition(0, 0)
         self.assertEqual(a, b)
 
     def testDifferent(self):
-        a = Diagonal.fromPosition(0, 0)
-        b = Diagonal.fromPosition(0, 2)
+        a = Threat.fromPosition(0, 0)
+        b = Threat.fromPosition(1, 2)
         self.assertTrue(a != b)
 
-    def testRealDiagonalLeft(self):
-        a = Diagonal.fromPosition(4, 4)
-        b = Diagonal.fromPosition(3, 3)
-        c = Diagonal.fromPosition(5, 5)
+    def testEqualHorizonatal(self):
+        a = Threat.fromPosition(0, 0)
+        b = Threat.fromPosition(1, 0)
+        self.assertEqual(a, b)
+
+    def testEqualVertical(self):
+        a = Threat.fromPosition(0, 6)
+        b = Threat.fromPosition(4, 6)
+        self.assertEqual(a, b)
+
+    def testEqualThreatLeft(self):
+        a = Threat.fromPosition(4, 4)
+        b = Threat.fromPosition(3, 3)
+        c = Threat.fromPosition(5, 5)
         self.assertEqual(a, b)
         self.assertEqual(a, c)
 
-    def testRealDiagonalRight(self):
-        a = Diagonal.fromPosition(4, 4)
-        b = Diagonal.fromPosition(5, 3)
-        c = Diagonal.fromPosition(3, 5)
+    def testEqualThreatRight(self):
+        a = Threat.fromPosition(4, 4)
+        b = Threat.fromPosition(5, 3)
+        c = Threat.fromPosition(3, 5)
         self.assertEqual(a, b)
         self.assertEqual(a, c)

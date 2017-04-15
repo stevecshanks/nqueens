@@ -1,6 +1,6 @@
 import unittest
 from nqueens.chessboard import Chessboard
-from nqueens.diagonal import Diagonal
+from nqueens.threat import Threat
 
 
 class TestChessboard(unittest.TestCase):
@@ -68,11 +68,18 @@ class TestChessboard(unittest.TestCase):
         self.assertEqual(len(threatenedColumns), 1)
         self.assertTrue(4 in threatenedColumns)
 
-    def testGetThreatenedDiagonals(self):
+    def testGetThreats(self):
         self.standardBoard.placeQueen(6, 3)
-        threatenedDiagonals = self.standardBoard.getThreatenedDiagonals()
-        self.assertEqual(len(threatenedDiagonals), 1)
-        self.assertTrue(Diagonal.fromPosition(6, 3) in threatenedDiagonals)
+        threats = self.standardBoard.getUniqueThreats()
+        self.assertEqual(len(threats), 1)
+        self.assertTrue(Threat.fromPosition(6, 3) in threats)
+
+    def testGetThreatsNoDuplicates(self):
+        self.standardBoard.placeQueen(0, 0)
+        self.standardBoard.placeQueen(1, 1)
+        threats = self.standardBoard.getUniqueThreats()
+        self.assertEqual(len(threats), 1)
+        self.assertTrue(Threat.fromPosition(0, 0) in threats)
 
     def testValidateEmpty(self):
         self.assertTrue(self.standardBoard.isValid())

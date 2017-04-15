@@ -1,4 +1,4 @@
-from nqueens.diagonal import Diagonal
+from nqueens.threat import Threat
 
 
 class Chessboard:
@@ -42,17 +42,9 @@ class Chessboard:
             raise ValueError("Attempted to remove queen from empty space")
 
     def isValid(self):
-        # The getThreatenedX functions return a unique list of values.  If the
-        # number of values doesn't match the number of queens, then they must
-        # share a threatened X and so the board state isn't valid
-        if len(self.getThreatenedColumns()) != len(self._queenPositions):
-            return False
-        if len(self.getThreatenedRows()) != len(self._queenPositions):
-            return False
-        if (len(self.getThreatenedDiagonals()) != len(self._queenPositions)):
-            return False
-
-        return True
+        # If the number of unique threats doesn't match the number of queens,
+        # then two or more queens must be threatening each other
+        return len(self.getUniqueThreats()) == len(self._queenPositions)
 
     def getThreatenedColumns(self):
         threatenedColumns = []
@@ -68,10 +60,10 @@ class Chessboard:
                 threatenedRows.append(pos[1])
         return threatenedRows
 
-    def getThreatenedDiagonals(self):
-        threatenedDiagonals = []
+    def getUniqueThreats(self):
+        threats = []
         for pos in self._queenPositions:
-            diagonal = Diagonal.fromPosition(pos[0], pos[1])
-            if diagonal not in threatenedDiagonals:
-                threatenedDiagonals.append(diagonal)
-        return threatenedDiagonals
+            threat = Threat.fromPosition(pos[0], pos[1])
+            if threat not in threats:
+                threats.append(threat)
+        return threats

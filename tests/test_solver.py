@@ -12,7 +12,7 @@ class TestSolver(unittest.TestCase):
         board = Chessboard.create(1)
         solution = self.solver.solve(board)
         self.assertIsNotNone(solution)
-        self.assertEqual(solution.size, 1)
+        self.assertEqual(solution.getSize(), 1)
         self.assertTrue(solution.hasQueen(0, 0))
         self.assertTrue(solution.isValid())
 
@@ -25,12 +25,13 @@ class TestSolver(unittest.TestCase):
         board = Chessboard.create(n)
         solution = self.solver.solve(board)
         self.assertIsNotNone(solution)
-        self.assertEqual(len(solution.queenPositions), n)
+        self.assertEqual(solution.getQueenCount(), n)
         self.assertTrue(solution.isValid())
 
     # Useful to have a quick-running but still reasonably-sized test
     def testSmall(self):
         self.runTestFor(6)
 
-    # def testStandard(self):
-    #     self.runTestFor(8)
+    @unittest.skip("Too slow")
+    def testStandard(self):
+         self.runTestFor(8)

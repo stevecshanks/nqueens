@@ -9,12 +9,12 @@ class Printer:
 
     def printBoard(self):
         self.printHeaderRow()
-        for y in range(0, self.board.size):
+        for y in range(0, self.board.getSize()):
             self.printRow(y)
 
     def printRow(self, y):
         self.output("|")
-        for x in range(0, self.board.size):
+        for x in range(0, self.board.getSize()):
             if self.board.hasQueen(x, y):
                 self.printQueen()
             else:
@@ -28,7 +28,7 @@ class Printer:
 
     def printHeaderRow(self):
         self.output("+")
-        for i in range(0, self.board.size):
+        for i in range(0, self.board.getSize()):
             self.output("---+")
         self.output("\n")
 

@@ -8,7 +8,7 @@ class TestChessboard(unittest.TestCase):
         self.standardBoard = Chessboard.create(8)
 
     def testCreateOk(self):
-        self.assertEqual(self.standardBoard.size, 8)
+        self.assertEqual(self.standardBoard.getSize(), 8)
 
     def testCreateInvalid(self):
         with self.assertRaises(ValueError):
@@ -49,6 +49,11 @@ class TestChessboard(unittest.TestCase):
         self.standardBoard.placeQueen(1, 1)
         self.standardBoard.removeQueen(1, 1)
         self.assertFalse(self.standardBoard.hasQueen(1, 1))
+
+    def testCountQueens(self):
+        self.assertEqual(self.standardBoard.getQueenCount(), 0)
+        self.standardBoard.placeQueen(1, 1)
+        self.assertEqual(self.standardBoard.getQueenCount(), 1)
 
     def testValidateEmpty(self):
         self.assertTrue(self.standardBoard.isValid())

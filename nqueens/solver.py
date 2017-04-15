@@ -1,5 +1,3 @@
-from nqueens.printer import Printer
-
 class Solver:
 
     @staticmethod
@@ -10,14 +8,14 @@ class Solver:
         return self.tryToPlaceValidQueen(board)
 
     def tryToPlaceValidQueen(self, solution):
-        if len(solution.queenPositions) == solution.size:
+        if solution.getQueenCount() == solution.getSize():
             if solution.isValid():
                 return solution
             else:
                 return None
 
-        for x in range(0, solution.size):
-            for y in range(0, solution.size):
+        for x in range(0, solution.getSize()):
+            for y in range(0, solution.getSize()):
                 if not solution.hasQueen(x, y):
                     solution.placeQueen(x, y)
                     if (solution.isValid()):

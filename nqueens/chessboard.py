@@ -39,26 +39,34 @@ class Chessboard:
             raise ValueError("Attempted to remove queen from empty space")
 
     def isValid(self):
-        attackedRows = []
-        attackedColumns = []
+        if len(self.getThreatenedColumns()) != len(self._queenPositions):
+            return False
+        if len(self.getThreatenedRows()) != len(self._queenPositions):
+            return False
+
         for pos in self._queenPositions:
             col = pos[0]
             row = pos[1]
-
-            if row in attackedRows:
-                return False
-            attackedRows.append(row)
-
-            if col in attackedColumns:
-                return False
-            attackedColumns.append(col)
-
             if self.hasDiagonalClash(col, row, -1):
                 return False
             if self.hasDiagonalClash(col, row, 1):
                 return False
 
         return True
+
+    def getThreatenedColumns(self):
+        threatenedColumns = []
+        for pos in self._queenPositions:
+            if pos[0] not in threatenedColumns:
+                threatenedColumns.append(pos[0])
+        return threatenedColumns
+
+    def getThreatenedRows(self):
+        threatenedRows = []
+        for pos in self._queenPositions:
+            if pos[1] not in threatenedRows:
+                threatenedRows.append(pos[1])
+        return threatenedRows
 
     def hasDiagonalClash(self, x, y, direction):
         x = x + direction

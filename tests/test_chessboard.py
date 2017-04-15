@@ -55,6 +55,18 @@ class TestChessboard(unittest.TestCase):
         self.standardBoard.placeQueen(1, 1)
         self.assertEqual(self.standardBoard.getQueenCount(), 1)
 
+    def testGetThreatenedRows(self):
+        self.standardBoard.placeQueen(4, 3)
+        threatenedRows = self.standardBoard.getThreatenedRows()
+        self.assertEqual(len(threatenedRows), 1)
+        self.assertTrue(3 in threatenedRows)
+
+    def testGetThreatenedColumns(self):
+        self.standardBoard.placeQueen(4, 3)
+        threatenedColumns = self.standardBoard.getThreatenedColumns()
+        self.assertEqual(len(threatenedColumns), 1)
+        self.assertTrue(4 in threatenedColumns)
+
     def testValidateEmpty(self):
         self.assertTrue(self.standardBoard.isValid())
 

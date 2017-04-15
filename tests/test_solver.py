@@ -6,11 +6,12 @@ from nqueens.solver import Solver
 class TestSolver(unittest.TestCase):
 
     def setUp(self):
-        self.solver = Solver.create()
+        self.standardBoard = Chessboard.create(8)
 
     def testSimpleSolution(self):
         board = Chessboard.create(1)
-        solution = self.solver.solve(board)
+        solver = Solver.create(board)
+        solution = solver.solve()
         self.assertIsNotNone(solution)
         self.assertEqual(solution.getSize(), 1)
         self.assertTrue(solution.hasQueen(0, 0))
@@ -18,12 +19,14 @@ class TestSolver(unittest.TestCase):
 
     def testImpossible(self):
         board = Chessboard.create(2)
-        solution = self.solver.solve(board)
+        solver = Solver.create(board)
+        solution = solver.solve()
         self.assertIsNone(solution)
 
     def runTestFor(self, n):
         board = Chessboard.create(n)
-        solution = self.solver.solve(board)
+        solver = Solver.create(board)
+        solution = solver.solve()
         self.assertIsNotNone(solution)
         self.assertEqual(solution.getQueenCount(), n)
         self.assertTrue(solution.isValid())
@@ -34,4 +37,4 @@ class TestSolver(unittest.TestCase):
 
     @unittest.skip("Too slow")
     def testStandard(self):
-         self.runTestFor(8)
+        self.runTestFor(8)

@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-import os
 import sys
 import getopt
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import context
 from nqueens.chessboard import Chessboard
 from nqueens.printer import Printer
 from nqueens.solver import Solver

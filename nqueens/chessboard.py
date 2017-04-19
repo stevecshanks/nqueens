@@ -1,3 +1,4 @@
+from nqueens.queen import Queen
 from nqueens.threat import Threat
 
 
@@ -12,13 +13,13 @@ class Chessboard:
 
     def __init__(self, size):
         self._size = size
-        self._queenPositions = []
+        self._queens = []
 
     def getSize(self):
         return self._size
 
     def getQueenCount(self):
-        return len(self._queenPositions)
+        return len(self._queens)
 
     def raiseErrorIfPositionIsInvalid(self, x, y):
         if (x < 0 or x >= self._size or y < 0 or y >= self._size):
@@ -26,18 +27,18 @@ class Chessboard:
 
     def hasQueen(self, x, y):
         self.raiseErrorIfPositionIsInvalid(x, y)
-        return (x, y) in self._queenPositions
+        return Queen(x, y) in self._queens
 
     def placeQueen(self, x, y):
         self.raiseErrorIfPositionIsInvalid(x, y)
-        if (x, y) in self._queenPositions:
+        if Queen(x, y) in self._queens:
             raise ValueError("Attempted to place queen in non-empty space")
-        self._queenPositions.append((x, y))
+        self._queens.append(Queen(x, y))
 
     def removeQueen(self, x, y):
         self.raiseErrorIfPositionIsInvalid(x, y)
-        if (x, y) in self._queenPositions:
-            self._queenPositions.remove((x, y))
+        if Queen(x, y) in self._queens:
+            self._queens.remove(Queen(x, y))
         else:
             raise ValueError("Attempted to remove queen from empty space")
 
@@ -47,26 +48,25 @@ class Chessboard:
     def isValid(self):
         # If the number of unique threats doesn't match the number of queens,
         # then two or more queens must be threatening each other
-        return len(self.getUniqueThreats()) == len(self._queenPositions)
+        return len(self.getUniqueThreats()) == len(self._queens)
 
     def getThreatenedColumns(self):
         threatenedColumns = []
-        for pos in self._queenPositions:
-            if pos[0] not in threatenedColumns:
-                threatenedColumns.append(pos[0])
+        for queen in self._queens:
+            if queen.x not in threatenedColumns:
+                threatenedColumns.append(queen.x)
         return threatenedColumns
 
     def getThreatenedRows(self):
         threatenedRows = []
-        for pos in self._queenPositions:
-            if pos[1] not in threatenedRows:
-                threatenedRows.append(pos[1])
+        for queen in self._queens:
+            if queen.y not in threatenedRows:
+                threatenedRows.append(queen.y)
         return threatenedRows
 
     def getUniqueThreats(self):
         threats = []
-        for pos in self._queenPositions:
-            threat = Threat.fromPosition(pos[0], pos[1])
-            if threat not in threats:
-                threats.append(threat)
+        for queen in self._queens:
+            if queen.getThreat() not in threats:
+                threats.append(queen.getThreat())
         return threats

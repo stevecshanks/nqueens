@@ -41,6 +41,9 @@ class Chessboard:
         else:
             raise ValueError("Attempted to remove queen from empty space")
 
+    def isSafeQueenPosition(self, x, y):
+        return Threat.fromPosition(x, y) not in self.getUniqueThreats()
+
     def isValid(self):
         # If the number of unique threats doesn't match the number of queens,
         # then two or more queens must be threatening each other

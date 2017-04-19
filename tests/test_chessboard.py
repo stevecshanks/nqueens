@@ -107,3 +107,10 @@ class TestChessboard(unittest.TestCase):
         self.standardBoard.placeQueen(4, 0)
         self.standardBoard.placeQueen(0, 4)
         self.assertFalse(self.standardBoard.isValid())
+
+    def testIsSafeQueenPositionTrue(self):
+        self.assertTrue(self.standardBoard.isSafeQueenPosition(0, 0))
+
+    def testIsSafeQueenPositionFalse(self):
+        self.standardBoard.placeQueen(0, 0)
+        self.assertFalse(self.standardBoard.isSafeQueenPosition(0, 0))

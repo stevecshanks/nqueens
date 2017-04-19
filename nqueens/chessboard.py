@@ -42,12 +42,15 @@ class Chessboard:
             raise ValueError("Attempted to remove queen from empty space")
 
     def isSafeQueenPosition(self, x, y):
-        return Queen(x, y).getThreat() not in self.getUniqueThreats()
+        return Queen(x, y).getThreat() not in self.getThreats()
 
     def isValid(self):
-        # If the number of unique threats doesn't match the number of queens,
-        # then two or more queens must be threatening each other
-        return len(self.getUniqueThreats()) == len(self._queens)
+        for queen in self._queens:
+            other_threats = [q.getThreat() for q in self._queens if q != queen]
+            if queen.getThreat() in other_threats:
+                return False
+
+        return True
 
     def getThreatenedColumns(self):
         return [queen.x for queen in self._queens]
@@ -55,9 +58,5 @@ class Chessboard:
     def getThreatenedRows(self):
         return [queen.y for queen in self._queens]
 
-    def getUniqueThreats(self):
-        threats = []
-        for queen in self._queens:
-            if queen.getThreat() not in threats:
-                threats.append(queen.getThreat())
-        return threats
+    def getThreats(self):
+        return [queen.getThreat() for queen in self._queens]

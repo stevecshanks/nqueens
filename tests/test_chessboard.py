@@ -70,16 +70,9 @@ class TestChessboard(unittest.TestCase):
 
     def testGetThreats(self):
         self.standardBoard.placeQueen(6, 3)
-        threats = self.standardBoard.getUniqueThreats()
+        threats = self.standardBoard.getThreats()
         self.assertEqual(len(threats), 1)
         self.assertTrue(Threat.fromPosition(6, 3) in threats)
-
-    def testGetThreatsNoDuplicates(self):
-        self.standardBoard.placeQueen(0, 0)
-        self.standardBoard.placeQueen(1, 1)
-        threats = self.standardBoard.getUniqueThreats()
-        self.assertEqual(len(threats), 1)
-        self.assertTrue(Threat.fromPosition(0, 0) in threats)
 
     def testValidateEmpty(self):
         self.assertTrue(self.standardBoard.isValid())

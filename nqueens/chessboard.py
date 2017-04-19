@@ -50,18 +50,10 @@ class Chessboard:
         return len(self.getUniqueThreats()) == len(self._queens)
 
     def getThreatenedColumns(self):
-        threatenedColumns = []
-        for queen in self._queens:
-            if queen.x not in threatenedColumns:
-                threatenedColumns.append(queen.x)
-        return threatenedColumns
+        return [queen.x for queen in self._queens]
 
     def getThreatenedRows(self):
-        threatenedRows = []
-        for queen in self._queens:
-            if queen.y not in threatenedRows:
-                threatenedRows.append(queen.y)
-        return threatenedRows
+        return [queen.y for queen in self._queens]
 
     def getUniqueThreats(self):
         threats = []

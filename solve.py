@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 import sys
 import getopt
-from chessboard import Chessboard
-from printer import Printer
-from solver import Solver
+from nqueens.chessboard import Chessboard
+from nqueens.printer import Printer
+from nqueens.solver import Solver
 
 
 def main():

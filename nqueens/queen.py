@@ -1,4 +1,4 @@
-from threat import Threat
+from nqueens.threat import Threat
 
 
 class Queen:

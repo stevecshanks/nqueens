@@ -1,12 +1,15 @@
 # nqueens
-Experimenting with Python unit testing and TDD using the NQueens problem.  The
-focus is more on having well-structured and tested code, rather than
+Having recently read Kent Beck's "Test-Driven Development By Example", I wanted
+to try the process out, and the "n queens" problem seemed as good a project as
+any.  Learning to unit test in Python was an added bonus.
+
+The focus was on having well-structured and well-tested code, rather than
 performance.
 
 To solve a board of size n, run:
 
 ```
-./nqueens/nqueens.py n
+./solve.py n
 ```
 
 To run the tests, run:

@@ -1,4 +1,4 @@
-from nqueens.queen import Queen
+from queen import Queen
 
 
 class Chessboard:

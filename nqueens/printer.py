@@ -24,12 +24,13 @@ class Printer:
         self.output("\n")
         self.printHeaderRow()
 
-    def output(self, string):
+    @staticmethod
+    def output(string):
         print(string, end='')
 
     def printHeaderRow(self):
         self.output("+")
-        for i in range(0, self._board.getSize()):
+        for _ in range(0, self._board.getSize()):
             self.output("----+")
         self.output("\n")
 

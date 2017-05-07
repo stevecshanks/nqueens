@@ -22,7 +22,7 @@ def main():
 
 def parse_command_line():
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "", [])
+        _, args = getopt.getopt(sys.argv[1:], "", [])
     except getopt.GetoptError:
         raise ValueError("Could not parse command line")
     if len(args) == 0:

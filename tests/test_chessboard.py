@@ -13,7 +13,7 @@ class TestChessboard(unittest.TestCase):
 
     def testCreateInvalid(self):
         with self.assertRaises(ValueError):
-            board = Chessboard.create(0)
+            Chessboard.create(0)
 
     def testHasQueenOk(self):
         self.assertFalse(self.standardBoard.hasQueen(0, 0))
